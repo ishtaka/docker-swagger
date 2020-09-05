@@ -1,0 +1,26 @@
+version: '3'
+services:
+  editor:
+    image: swaggerapi/swagger-editor
+    ports:
+      - "8081:8080"
+    container_name: "swagger-editor"
+
+  ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./api/openapi.yaml:/usr/share/nginx/html/openapi.yaml
+    environment:
+      API_URL: openapi.yaml
+    container_name: "swagger-ui"
+
+  mock:
+    image: danielgtaylor/apisprout
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api/openapi.yaml:/openapi.yaml
+    command: /openapi.yaml --watch
+    container_name: "swagger-mock"

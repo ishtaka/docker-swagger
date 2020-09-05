@@ -1,0 +1,28 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Sample API
+  description: This is a sample api by OpenAPI
+servers:
+  - url: http://localhost:8000
+    description: local server for testing
+paths:
+  /users:
+    get:
+      description: Return a list of users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1234567"
